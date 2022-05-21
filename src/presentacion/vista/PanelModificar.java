@@ -14,7 +14,6 @@ import javax.swing.JButton;
 
 public class PanelModificar extends JPanel {
 
-
 	private static final long serialVersionUID = 1L;
 	private JTextField txfNombre;
 	private JTextField txfDNI;
