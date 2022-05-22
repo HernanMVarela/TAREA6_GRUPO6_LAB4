@@ -11,11 +11,34 @@ import dao.PersonaDao;
 import entidad.Persona;
 
 public class PersonaDaoImpl implements PersonaDao  {
+	
+	private String modifi = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
 
 	@Override
-	public boolean modificarPersona(Persona Modificar, int dni) {
-		
-		return false;
+	public boolean modificarPersona(Persona Modificar, String dni) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean modificarOk = false;
+		try {
+			statement = conexion.prepareStatement(modifi);
+			statement.setString(1, Modificar.getDni());
+			statement.setString(2, Modificar.getNombre());
+			statement.setString(3, Modificar.getApellido());
+			statement.setString(4, dni);
+			
+			if(statement.executeUpdate() > 0) {
+				conexion.commit();
+				modificarOk = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return modificarOk;
 	}
 	
 	public List<Persona> listarPersonas() {

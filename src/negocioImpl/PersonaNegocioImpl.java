@@ -7,7 +7,7 @@ import negocio.PersonaNegocio;
 
 public class PersonaNegocioImpl implements PersonaNegocio {
 	
-	public boolean modificarPersona(Persona Modificar, int dni) {
+	public boolean modificarPersona(Persona Modificar, String dni) {
 		PersonaDao modificar = new PersonaDaoImpl();
 		return modificar.modificarPersona(Modificar, dni);
 	}
