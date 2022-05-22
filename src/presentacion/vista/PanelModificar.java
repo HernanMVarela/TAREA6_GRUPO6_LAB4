@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
-import entidades.Persona;
+import entidad.Persona;
 
 import java.awt.Font;
 

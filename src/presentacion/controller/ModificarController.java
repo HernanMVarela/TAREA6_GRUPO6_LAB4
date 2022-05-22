@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-import entidades.Persona;
+import entidad.Persona;
 import negocio.PersonaNegocio;
 import presentacion.vista.PanelModificar;
 

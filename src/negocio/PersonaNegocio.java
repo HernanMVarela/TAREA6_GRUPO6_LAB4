@@ -1,6 +1,6 @@
 package negocio;
 
-import entidades.Persona;
+import entidad.Persona;
 
 public interface PersonaNegocio {
 

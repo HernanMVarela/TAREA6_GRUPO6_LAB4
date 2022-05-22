@@ -1,20 +1,17 @@
 package main;
 
 import negocio.PersonaNegocio;
-import negocioImplo.PersonaNegocioImpl;
-import presentacion.controller.ListarController;
+import negocioImpl.PersonaNegocioImpl;
+import presentacion.controller.ControladorPrincipal;
 import presentacion.vista.VentanaPrincipal;
 
-public class principal {
-
+public class Principal {
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		VentanaPrincipal vista = new VentanaPrincipal();
-		
 		PersonaNegocio negocio = new PersonaNegocioImpl();
-		
-		//controladores
+		ControladorPrincipal controlador = new ControladorPrincipal(vista, negocio);
+		controlador.inicializar();
 	}
 
 }

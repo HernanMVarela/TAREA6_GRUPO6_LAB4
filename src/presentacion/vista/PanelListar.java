@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import entidades.Persona;
+import entidad.Persona;
 
 public class PanelListar extends JPanel {
 	private DefaultTableModel modelPersonas;

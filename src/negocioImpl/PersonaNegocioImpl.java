@@ -1,8 +1,8 @@
-package negocioImplo;
+package negocioImpl;
 
 import dao.PersonaDao;
 import daoImpl.PersonaDaoImpl;
-import entidades.Persona;
+import entidad.Persona;
 import negocio.PersonaNegocio;
 
 public class PersonaNegocioImpl implements PersonaNegocio {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.PersonaDao;
-import entidades.Persona;
+import entidad.Persona;
 
 public class PersonaDaoImpl implements PersonaDao  {
 
@@ -17,10 +17,6 @@ public class PersonaDaoImpl implements PersonaDao  {
 		
 		return false;
 	}
-	
-	
-
-	
 	
 	public List<Persona> listarPersonas() {
 		PreparedStatement st;

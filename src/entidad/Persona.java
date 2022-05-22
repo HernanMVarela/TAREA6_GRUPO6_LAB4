@@ -1,4 +1,4 @@
-package entidades;
+package entidad;
 
 public class Persona {
 
@@ -10,7 +10,6 @@ public class Persona {
 	}
 
 	public Persona(String dni, String apellido, String nombre) {
-		super();
 		this.dni = dni;
 		this.apellido = apellido;
 		this.nombre = nombre;
