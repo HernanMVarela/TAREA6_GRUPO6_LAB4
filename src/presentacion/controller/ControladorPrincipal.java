@@ -80,10 +80,12 @@ public class ControladorPrincipal implements ActionListener {
 	//EventoClickMenu abrir PanelEliminar
 	public void EventoClickMenu_AbrirPanel_Eliminar(ActionEvent a)
 	{		
-		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(panelEliminar);
-		ventanaPrincipal.getContentPane().repaint();
-		ventanaPrincipal.getContentPane().revalidate();
+		panelEliminar = new PanelEliminar();
+		PersonaNegocio negocio = new PersonaNegocioImpl();
+		EliminarController PenModCont = new EliminarController(panelEliminar,negocio);
+		this.ventanaPrincipal.setContentPane(panelEliminar);
+		this.ventanaPrincipal.repaint();
+		this.ventanaPrincipal.revalidate();
 	}
 	
 	//EventoClickMenu abrir PanelListar
