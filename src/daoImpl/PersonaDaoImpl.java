@@ -15,6 +15,7 @@ public class PersonaDaoImpl implements PersonaDao  {
 	
 	private String modifi = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
 	private String readall = "SELECT * FROM personas";
+	private String delete = "DELETE FROM personas WHERE DNI = ?";
 
 	@Override
 	public boolean modificarPersona(Persona Modificar, String dni) {
@@ -94,5 +95,29 @@ public class PersonaDaoImpl implements PersonaDao  {
 		String nombre = resultSet.getString("Nombre");
 		String apellido = resultSet.getString("Apellido");
 		return new Persona(dni, nombre, apellido);
+	}
+
+	@Override
+	public boolean eliminarPersona(Persona Eliminar) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean eliminarOK = false;
+		try {
+			statement = conexion.prepareStatement(delete);
+			statement.setString(1, Eliminar.getDni());
+			
+			if(statement.executeUpdate() > 0) {
+				conexion.commit();
+				eliminarOK = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return eliminarOK;
 	}
 }

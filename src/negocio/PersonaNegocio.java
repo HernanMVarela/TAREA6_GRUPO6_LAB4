@@ -8,4 +8,6 @@ public interface PersonaNegocio {
 
 	public boolean modificarPersona(Persona Modificar, String dNI);
 	public List<Persona> readAll();
+	public boolean eliminarPersona(Persona Eliminar);
+	
 }

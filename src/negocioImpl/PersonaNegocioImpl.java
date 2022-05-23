@@ -13,11 +13,18 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 		PersonaDao modificar = new PersonaDaoImpl();
 		return modificar.modificarPersona(Modificar, dni);
 	}
+	
 
 	@Override
 	public List<Persona> readAll() {
 		PersonaDao perdao = new PersonaDaoImpl();
 		return perdao.readAll();
 		
+	}
+
+	@Override
+	public boolean eliminarPersona(Persona Eliminar) {
+		PersonaDao eliminar = new PersonaDaoImpl();
+		return eliminar.eliminarPersona(Eliminar);
 	}
 }

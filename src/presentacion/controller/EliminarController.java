@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import entidad.Persona;
 import negocio.PersonaNegocio;
@@ -21,17 +22,28 @@ public class EliminarController implements ActionListener {
 		this.pEliminarTMP = pEliminar;
 		this.negocioTMP = negocio;
 		cargarLista();
-		pEliminar.repaint();
-		pEliminar.revalidate();
+		pEliminarTMP.repaint();
+		pEliminarTMP.revalidate();
 		this.pEliminarTMP.getBtnEliminar().addActionListener(e->eliminarPersona(e));
 		
-		
-		
-	
 	}
 	
 	private void eliminarPersona(ActionEvent e) {
 		
+		if (!pEliminarTMP.getListaPersonas().isSelectionEmpty()) {
+			Persona delete = pEliminarTMP.getListaPersonas().getSelectedValue();
+			if (negocioTMP.eliminarPersona(delete)) {
+				JOptionPane.showMessageDialog(null, "Persona ELIMINADA");
+				cargarLista();
+				pEliminarTMP.repaint();
+				pEliminarTMP.revalidate();
+			} else {
+				JOptionPane.showMessageDialog(null, "ERROR - No se pudo procesar la solicitud");
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ERROR - No hay una persona seleccionada");
+		}
 	}
 	
 	private void cargarLista() {
