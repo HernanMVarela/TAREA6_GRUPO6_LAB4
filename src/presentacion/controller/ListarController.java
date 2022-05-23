@@ -2,12 +2,8 @@ package presentacion.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-
-import entidades.Persona;
+import entidad.Persona;
 import negocio.PersonaNegocio;
 import presentacion.vista.PanelListar;
 
@@ -19,11 +15,11 @@ public class ListarController  implements ActionListener{
 	
 
 public ListarController(PanelListar panel, PersonaNegocio negocio) {
-		this.PanLe = panel;
+		this.PanLi = panel;
 		this.PerNeg = negocio;
-		cargarLista();
-		PanLe.getBtnListar().addActionListener(l -> ListarPersona(l));
-	}del;
+		//cargarLista();
+		//PanLi.getBtnListar().addActionListener(l -> ListarPersona(l));
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

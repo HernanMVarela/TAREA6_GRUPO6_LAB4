@@ -3,6 +3,7 @@ package daoImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import entidad.Persona;
 public class PersonaDaoImpl implements PersonaDao  {
 	
 	private String modifi = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
+	private String readall = "SELECT * FROM personas";
 
 	@Override
 	public boolean modificarPersona(Persona Modificar, String dni) {
@@ -67,29 +69,30 @@ public class PersonaDaoImpl implements PersonaDao  {
 		return personas;
 	}
 	
-	public ArrayList<Persona> readAll() {
-		ArrayList<Persona> lpersonas = new ArrayList<Persona>();
-		String query= "select * from personas";
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-			
-		Statement st;
+	public List<Persona> readAll() {
+		List<Persona> lpersonas = new ArrayList<Persona>();
+		Conexion conexion = Conexion.getConexion();
+		PreparedStatement st;
+		ResultSet rs;
 		try {
-			st =  (Statement) conexion.createStatement();
-			ResultSet rs = st.executeQuery(query);
+			st = conexion.getSQLConexion().prepareStatement(readall);
+			rs = st.executeQuery();
 			while(rs.next()) {
-				Persona x = new Persona();
-				x.setDni(rs.getString("Dni"));
-				x.setNombre(rs.getString("Nombre"));
-				x.setApellido(rs.getString("Apellido"));
-				lpersonas.add(x);
-				
+				lpersonas.add(getPersona(rs));
 			}
 		} catch (Exception e) {
 	
 			e.printStackTrace();
 		}
 	return lpersonas;
-		
-		
+			
+	}
+	
+	private Persona getPersona(ResultSet resultSet) throws SQLException
+	{
+		String dni = resultSet.getString("Dni");
+		String nombre = resultSet.getString("Nombre");
+		String apellido = resultSet.getString("Apellido");
+		return new Persona(dni, nombre, apellido);
 	}
 }

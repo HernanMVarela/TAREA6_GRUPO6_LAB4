@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
 
 import entidad.Persona;
 import negocio.PersonaNegocio;
@@ -21,29 +22,44 @@ public class ModificarController implements ActionListener {
 	public ModificarController(PanelModificar panel, PersonaNegocio negocio) {
 		this.PanMo = panel;
 		this.PerNeg = negocio;
+
 		cargarLista();
 		PanMo.getBtnModificar().addActionListener(m -> ModificarPersona(m));
+		PanMo.getListPersonas().addListSelectionListener(l -> SeleccionarPersona(l));
+	}
+
+	private void SeleccionarPersona(ListSelectionEvent l){
+		if(!PanMo.getListPersonas().isSelectionEmpty()) {
+		PanMo.getTxfNombre().setText(PanMo.getListPersonas().getSelectedValue().getNombre());
+		PanMo.getTxfApellido().setText(PanMo.getListPersonas().getSelectedValue().getApellido());
+		PanMo.getTxfDNI().setText(PanMo.getListPersonas().getSelectedValue().getDni());
+		}else {
+			PanMo.getTxfNombre().setText("");
+			PanMo.getTxfApellido().setText("");
+			PanMo.getTxfDNI().setText("");
+		}
 	}
 
 	private void ModificarPersona(ActionEvent m) {
-		Persona Modificar = new Persona();
-		String DNI = PanMo.getListPersonas().getSelectedValue().getDni();
-		Modificar.setNombre(PanMo.getTxfNombre().getText());
-		Modificar.setApellido(PanMo.getTxfApellido().getText());
-		Modificar.setDni(PanMo.getTxfDNI().getText());
-		
-		if(PerNeg.modificarPersona(Modificar, DNI)){
-			JOptionPane.showMessageDialog(null, "Persona modificada");
-		}else {
-			JOptionPane.showMessageDialog(null, "No se puedo modificar persona");
+		if(validarTextfield()) {
+			Persona Modificar = new Persona();
+			String DNI = PanMo.getListPersonas().getSelectedValue().getDni();
+			Modificar.setNombre(PanMo.getTxfNombre().getText());
+			Modificar.setApellido(PanMo.getTxfApellido().getText());
+			Modificar.setDni(PanMo.getTxfDNI().getText());
+			if(PerNeg.modificarPersona(Modificar, DNI)){
+				JOptionPane.showMessageDialog(null, "Persona modificada");
+			}else {
+				JOptionPane.showMessageDialog(null, "No se puedo modificar persona");
+			}
+			limpiarTextfield();
+			PanMo.repaint();
+			PanMo.revalidate();
 		}
-		limpiarTextfield();
-		PanMo.repaint();
-		PanMo.revalidate();
 	}
 	
 	private void cargarLista() {
-		List<Persona> lista = PerNeg.Listar();			// METODO PARA LISTAR TODOS - DEBE DEVOLVER LISTA DE PERSONAS
+		List<Persona> lista = PerNeg.readAll();			// METODO PARA LISTAR TODOS - DEBE DEVOLVER LISTA DE PERSONAS
 		listmodel = new DefaultListModel<Persona>();
 		listmodel = PanMo.getModel();
 		PanMo.getModel().clear();
