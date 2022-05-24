@@ -3,9 +3,9 @@ package presentacion.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import entidad.Persona;
 import negocio.PersonaNegocio;
+import negocioImpl.PersonaNegocioImpl;
 import presentacion.vista.PanelEliminar;
 import presentacion.vista.VentanaPrincipal;
 import presentacion.vista.PanelAgregar;
@@ -69,19 +69,23 @@ public class ControladorPrincipal implements ActionListener {
 	//EventoClickMenu abrir PanelModificar
 	public void  EventoClickMenu_AbrirPanel_Modificar(ActionEvent a)
 	{		
-		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(panelModificar);
-		ventanaPrincipal.getContentPane().repaint();
-		ventanaPrincipal.getContentPane().revalidate();
+		panelModificar = new PanelModificar();
+		PersonaNegocio negocio = new PersonaNegocioImpl();
+		ModificarController PenModCont = new ModificarController(panelModificar,negocio);
+		this.ventanaPrincipal.setContentPane(panelModificar);
+		this.ventanaPrincipal.repaint();
+		this.ventanaPrincipal.revalidate();
 	}
 	
 	//EventoClickMenu abrir PanelEliminar
 	public void EventoClickMenu_AbrirPanel_Eliminar(ActionEvent a)
 	{		
-		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(panelEliminar);
-		ventanaPrincipal.getContentPane().repaint();
-		ventanaPrincipal.getContentPane().revalidate();
+		panelEliminar = new PanelEliminar();
+		PersonaNegocio negocio = new PersonaNegocioImpl();
+		EliminarController PenModCont = new EliminarController(panelEliminar,negocio);
+		this.ventanaPrincipal.setContentPane(panelEliminar);
+		this.ventanaPrincipal.repaint();
+		this.ventanaPrincipal.revalidate();
 	}
 	
 	//EventoClickMenu abrir PanelListar

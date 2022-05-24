@@ -1,8 +1,13 @@
 package negocio;
 
+import java.util.List;
+
 import entidad.Persona;
 
 public interface PersonaNegocio {
 
-	public boolean modificarPersona(Persona Modificar, int dni);
+	public boolean modificarPersona(Persona Modificar, String dNI);
+	public List<Persona> readAll();
+	public boolean eliminarPersona(Persona Eliminar);
+	
 }
