@@ -25,6 +25,9 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 	@Override
 	public boolean eliminarPersona(Persona Eliminar) {
 		PersonaDao eliminar = new PersonaDaoImpl();
-		return eliminar.eliminarPersona(Eliminar);
+		if (eliminar.readAll().contains(Eliminar)) {		
+				return eliminar.eliminarPersona(Eliminar);
+		} else
+		{ return false; }
 	}
 }
