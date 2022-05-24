@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import entidad.Persona;
 
 public class PanelListar extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
 	private JTable tablaPersona;
