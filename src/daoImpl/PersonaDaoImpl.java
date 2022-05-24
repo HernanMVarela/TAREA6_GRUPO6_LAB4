@@ -44,32 +44,6 @@ public class PersonaDaoImpl implements PersonaDao  {
 		return modificarOk;
 	}
 	
-	public List<Persona> listarPersonas() {
-		PreparedStatement st;
-		ResultSet rs;
-		ArrayList<Persona> personas = new ArrayList<Persona>();
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		
-		
-		try {
-			st = conexion.prepareStatement("SELECT * FROM personas");
-			rs = st.executeQuery();
-			while(rs.next()) {
-				Persona p = new Persona();
-				p.setNombre(rs.getString("Nombre"));
-				p.setApellido(rs.getString("Apellido"));
-				p.setDni(rs.getString("Dni"));
-				personas.add(p);
-			}
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		return personas;
-	}
-	
 	public List<Persona> readAll() {
 		List<Persona> lpersonas = new ArrayList<Persona>();
 		Conexion conexion = Conexion.getConexion();
@@ -94,7 +68,7 @@ public class PersonaDaoImpl implements PersonaDao  {
 		String dni = resultSet.getString("Dni");
 		String nombre = resultSet.getString("Nombre");
 		String apellido = resultSet.getString("Apellido");
-		return new Persona(dni, nombre, apellido);
+		return new Persona(dni, apellido, nombre);
 	}
 
 	@Override

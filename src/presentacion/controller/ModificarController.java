@@ -3,6 +3,9 @@ package presentacion.controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -26,13 +29,39 @@ public class ModificarController implements ActionListener {
 		cargarLista();
 		PanMo.getBtnModificar().addActionListener(m -> ModificarPersona(m));
 		PanMo.getListPersonas().addListSelectionListener(l -> SeleccionarPersona(l));
+		PanMo.getTxfDNI().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {soloNumerosDNI(e);}
+		});
+		PanMo.getTxfNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {soloLetras(e, PanMo.getTxfNombre().getText());}
+		});
+		PanMo.getTxfApellido().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e)  {soloLetras(e, PanMo.getTxfApellido().getText());}
+		});
 	}
 
+	private void soloNumerosDNI(KeyEvent e) {
+		char c = e.getKeyChar();
+		if(PanMo.getTxfDNI().getText().length()>=8 || ((c<'0') || (c>'9'))) {
+			e.consume();
+		}
+	}
+	
+	private void soloLetras(KeyEvent e, String s) {
+		char c = e.getKeyChar();
+		if(s.length()>=25 || !Character.isAlphabetic(c)) {
+			e.consume();
+		}
+	}
+	
 	private void SeleccionarPersona(ListSelectionEvent l){
 		if(!PanMo.getListPersonas().isSelectionEmpty()) {
-		PanMo.getTxfNombre().setText(PanMo.getListPersonas().getSelectedValue().getNombre());
-		PanMo.getTxfApellido().setText(PanMo.getListPersonas().getSelectedValue().getApellido());
-		PanMo.getTxfDNI().setText(PanMo.getListPersonas().getSelectedValue().getDni());
+			PanMo.getTxfNombre().setText(PanMo.getListPersonas().getSelectedValue().getNombre());
+			PanMo.getTxfApellido().setText(PanMo.getListPersonas().getSelectedValue().getApellido());
+			PanMo.getTxfDNI().setText(PanMo.getListPersonas().getSelectedValue().getDni());
 		}else {
 			PanMo.getTxfNombre().setText("");
 			PanMo.getTxfApellido().setText("");
@@ -59,7 +88,7 @@ public class ModificarController implements ActionListener {
 	}
 	
 	private void cargarLista() {
-		List<Persona> lista = PerNeg.readAll();			// METODO PARA LISTAR TODOS - DEBE DEVOLVER LISTA DE PERSONAS
+		List<Persona> lista = PerNeg.readAll();
 		listmodel = new DefaultListModel<Persona>();
 		listmodel = PanMo.getModel();
 		PanMo.getModel().clear();
@@ -111,4 +140,5 @@ public class ModificarController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 	}
+
 }
