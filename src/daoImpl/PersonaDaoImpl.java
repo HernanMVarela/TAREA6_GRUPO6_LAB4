@@ -13,9 +13,11 @@ import entidad.Persona;
 
 public class PersonaDaoImpl implements PersonaDao  {
 	
+	private String add = "INSERT INTO personas (Dni, Nombre, Apellido) VALUES (?,?,?)";
 	private String modifi = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
 	private String readall = "SELECT * FROM personas";
 	private String delete = "DELETE FROM personas WHERE DNI = ?";
+	//private String getPersonaPorDni = "SELECT Dni FROM personas WHERE Dni = ?";
 
 	@Override
 	public boolean modificarPersona(Persona Modificar, String dni) {
@@ -63,6 +65,25 @@ public class PersonaDaoImpl implements PersonaDao  {
 			
 	}
 	
+	/*public String getPersonaPorDni(String dni) {
+		String dniExistente = null;
+		Conexion conn = Conexion.getConexion();
+		PreparedStatement st;
+		ResultSet rs;
+		try {
+			st = conn.getSQLConexion().prepareStatement(getPersonaPorDni);
+			st.setString(1, dni);
+			rs = st.executeQuery();
+			while(rs.next()) {
+				dniExistente=rs.getString("Dni");
+			}
+		} catch (Exception e) {
+	
+			e.printStackTrace();
+		}
+		return dniExistente;
+	}*/
+	
 	private Persona getPersona(ResultSet resultSet) throws SQLException
 	{
 		String dni = resultSet.getString("Dni");
@@ -93,5 +114,33 @@ public class PersonaDaoImpl implements PersonaDao  {
 			}
 		}
 		return eliminarOK;
+	}
+	
+	@Override 
+	public boolean agregarPersona(Persona Agregar) {
+		PreparedStatement statement;
+		Connection con = Conexion.getConexion().getSQLConexion();
+		boolean agregar = false;
+		try {
+			statement = con.prepareStatement(add);
+			statement.setString(1, Agregar.getDni());
+			statement.setString(2, Agregar.getNombre());
+			statement.setString(3, Agregar.getApellido());
+			
+			if(statement.executeUpdate() > 0) {
+				con.commit();
+				agregar = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return agregar;
+		
 	}
 }

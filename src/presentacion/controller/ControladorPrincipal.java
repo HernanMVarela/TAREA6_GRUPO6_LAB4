@@ -59,11 +59,13 @@ public class ControladorPrincipal implements ActionListener {
 	
 	//EventoClickMenu abrir PanelAgregar
 	public void  EventoClickMenu_AbrirPanel_Agregar(ActionEvent a)
-	{		
-		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(panelAgregar);
-		ventanaPrincipal.getContentPane().repaint();
-		ventanaPrincipal.getContentPane().revalidate();
+	{	
+		panelAgregar = new PanelAgregar();
+		PersonaNegocio negocio = new PersonaNegocioImpl();
+		AgregarController agregarController = new AgregarController(panelAgregar,negocio);
+		this.ventanaPrincipal.setContentPane(panelAgregar);
+		this.ventanaPrincipal.getContentPane().repaint();
+		this.ventanaPrincipal.getContentPane().revalidate();
 	}
 	
 	//EventoClickMenu abrir PanelModificar

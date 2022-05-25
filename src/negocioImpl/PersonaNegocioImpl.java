@@ -30,4 +30,18 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 		} else
 		{ return false; }
 	}
+
+
+	@Override
+	public boolean agregarPersona(Persona Agregar) {
+		PersonaDao agregar = new PersonaDaoImpl();
+		return agregar.agregarPersona(Agregar);
+	}
+
+
+	/*@Override
+	public String getPersonaPorDni(String dni) {
+		String dniExistente = new PersonaDaoImpl().getPersonaPorDni(dni);
+		return dniExistente;
+	}*/
 }
