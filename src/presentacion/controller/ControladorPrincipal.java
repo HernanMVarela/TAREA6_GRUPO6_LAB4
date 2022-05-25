@@ -2,10 +2,7 @@ package presentacion.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import entidad.Persona;
 import negocio.PersonaNegocio;
-import negocioImpl.PersonaNegocioImpl;
 import presentacion.vista.PanelEliminar;
 import presentacion.vista.VentanaPrincipal;
 import presentacion.vista.PanelAgregar;
@@ -18,7 +15,7 @@ public class ControladorPrincipal implements ActionListener {
 	private PanelAgregar panelAgregar;
 	private PanelEliminar panelEliminar;
 	private PersonaNegocio personaNegocio;
-	private ArrayList<Persona> personasEnTabla;
+	//private ArrayList<Persona> personasEnTabla;
 	
 	private PanelListar panelListar;
 	private PanelModificar panelModificar;
@@ -61,8 +58,7 @@ public class ControladorPrincipal implements ActionListener {
 	public void  EventoClickMenu_AbrirPanel_Agregar(ActionEvent a)
 	{	
 		panelAgregar = new PanelAgregar();
-		PersonaNegocio negocio = new PersonaNegocioImpl();
-		AgregarController agregarController = new AgregarController(panelAgregar,negocio);
+		AgregarController agregarController = new AgregarController(panelAgregar,personaNegocio);
 		this.ventanaPrincipal.setContentPane(panelAgregar);
 		this.ventanaPrincipal.getContentPane().repaint();
 		this.ventanaPrincipal.getContentPane().revalidate();
@@ -72,8 +68,8 @@ public class ControladorPrincipal implements ActionListener {
 	public void  EventoClickMenu_AbrirPanel_Modificar(ActionEvent a)
 	{		
 		panelModificar = new PanelModificar();
-		PersonaNegocio negocio = new PersonaNegocioImpl();
-		ModificarController PenModCont = new ModificarController(panelModificar,negocio);
+		ModificarController PenModCont = new ModificarController(panelModificar,personaNegocio);
+		PenModCont.inicializar();
 		this.ventanaPrincipal.setContentPane(panelModificar);
 		this.ventanaPrincipal.repaint();
 		this.ventanaPrincipal.revalidate();
@@ -83,23 +79,23 @@ public class ControladorPrincipal implements ActionListener {
 	public void EventoClickMenu_AbrirPanel_Eliminar(ActionEvent a)
 	{		
 		panelEliminar = new PanelEliminar();
-		PersonaNegocio negocio = new PersonaNegocioImpl();
-		EliminarController PenModCont = new EliminarController(panelEliminar,negocio);
+		EliminarController PenEliCont = new EliminarController(panelEliminar,personaNegocio);
+		PenEliCont.inicializar();
 		this.ventanaPrincipal.setContentPane(panelEliminar);
 		this.ventanaPrincipal.repaint();
 		this.ventanaPrincipal.revalidate();
 	}
 	
 	//EventoClickMenu abrir PanelListar
-		public void EventoClickMenu_AbrirPanel_Listar(ActionEvent a)
-		{		
-			panelListar = new PanelListar();
-			PersonaNegocio negocio = new PersonaNegocioImpl();
-			ListarController PenModCont = new ListarController(panelListar,negocio);
-			this.ventanaPrincipal.setContentPane(panelListar);
-			this.ventanaPrincipal.repaint();
-			this.ventanaPrincipal.revalidate();
-		}
+	public void EventoClickMenu_AbrirPanel_Listar(ActionEvent a)
+	{		
+		panelListar = new PanelListar();
+		ListarController PenLisCont = new ListarController(panelListar,personaNegocio);
+		PenLisCont.inicializar();
+		this.ventanaPrincipal.setContentPane(panelListar);
+		this.ventanaPrincipal.repaint();
+		this.ventanaPrincipal.revalidate();
+	}
 
 	//EventoClickBoton agregar persona en PanelAgregar
 //	private void EventoClickBoton_Agregar_PanelAgregar(ActionEvent a) {

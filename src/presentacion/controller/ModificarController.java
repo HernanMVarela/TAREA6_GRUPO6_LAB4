@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -25,8 +24,7 @@ public class ModificarController implements ActionListener {
 	public ModificarController(PanelModificar panel, PersonaNegocio negocio) {
 		this.PanMo = panel;
 		this.PerNeg = negocio;
-
-		cargarLista();
+		
 		PanMo.getBtnModificar().addActionListener(m -> ModificarPersona(m));
 		PanMo.getListPersonas().addListSelectionListener(l -> SeleccionarPersona(l));
 		PanMo.getTxfDNI().addKeyListener(new KeyAdapter() {
@@ -81,19 +79,17 @@ public class ModificarController implements ActionListener {
 			}else {
 				JOptionPane.showMessageDialog(null, "No se puedo modificar persona");
 			}
-			limpiarTextfield();
+			inicializar();
 			PanMo.repaint();
 			PanMo.revalidate();
 		}
 	}
 	
 	private void cargarLista() {
-		List<Persona> lista = PerNeg.readAll();
-		listmodel = new DefaultListModel<Persona>();
 		listmodel = PanMo.getModel();
 		PanMo.getModel().clear();
-		for (int x=0; x< lista.size(); x++) {
-			listmodel.addElement((Persona)lista.get(x));
+		for (int x=0; x< PerNeg.readAll().size(); x++) {
+			listmodel.addElement(PerNeg.readAll().get(x));
 		}
 		PanMo.setModel(listmodel);
 	}
@@ -122,13 +118,13 @@ public class ModificarController implements ActionListener {
 		}
 		if(PanMo.getListPersonas().isSelectionEmpty()) {
 			JOptionPane.showMessageDialog(null, "No se seleccionó ninguna persona");
-			limpiarTextfield();
+			inicializar();
 			pass=false;
 		}
 		return pass;
 	}
 	
-	private void limpiarTextfield() {
+	public void inicializar() {
 		PanMo.getTxfApellido().setText("");
 		PanMo.getTxfNombre().setText("");
 		PanMo.getTxfDNI().setText("");

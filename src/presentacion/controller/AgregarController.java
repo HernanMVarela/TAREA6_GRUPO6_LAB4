@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import entidad.Persona;
@@ -21,8 +20,6 @@ public class AgregarController implements ActionListener {
 	public AgregarController(PanelAgregar panel, PersonaNegocio negocio) {
 		this.panelAgregar = panel;
 		this.perNegocio = negocio;
-
-		
 		
 		panelAgregar.getBtnAceptar().addActionListener(l -> agregarPersona(l));
 		panelAgregar.getTextFieldDni().addKeyListener(new KeyAdapter() {
@@ -38,7 +35,6 @@ public class AgregarController implements ActionListener {
 			public void keyTyped(KeyEvent e)  {soloLetras(e, panelAgregar.getTextFieldApellido().getText());}
 		});
 		
-
 	}
 	
 	private void agregarPersona(ActionEvent m) {
@@ -107,8 +103,6 @@ public class AgregarController implements ActionListener {
 		panelAgregar.getTextFieldNombre().setText("");
 		panelAgregar.getTextFieldDni().setText("");
 	}
-	
-	
 	
 	
 	@Override

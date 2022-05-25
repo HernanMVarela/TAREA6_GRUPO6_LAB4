@@ -21,9 +21,7 @@ public class EliminarController implements ActionListener {
 	public EliminarController(PanelEliminar pEliminar, PersonaNegocio negocio) {
 		this.pEliminarTMP = pEliminar;
 		this.negocioTMP = negocio;
-		cargarLista();
-		pEliminarTMP.repaint();
-		pEliminarTMP.revalidate();
+	
 		this.pEliminarTMP.getBtnEliminar().addActionListener(e->eliminarPersona(e));
 		
 	}
@@ -47,16 +45,17 @@ public class EliminarController implements ActionListener {
 	}
 	
 	private void cargarLista() {
-		List<Persona> lista = this.negocioTMP.readAll();			// METODO PARA LISTAR TODOS - DEBE DEVOLVER LISTA DE PERSONAS
-		listmodel = new DefaultListModel<Persona>();
-		listmodel = this.pEliminarTMP.getModel();
-		this.pEliminarTMP.getModel().clear();
-		for (int x=0; x< lista.size(); x++) {
-			listmodel.addElement((Persona)lista.get(x));
+		listmodel = pEliminarTMP.getModel();
+		pEliminarTMP.getModel().clear();
+		for (int x=0; x< negocioTMP.readAll().size(); x++) {
+			listmodel.addElement(negocioTMP.readAll().get(x));
 		}
-		this.pEliminarTMP.setModel(listmodel);
+		pEliminarTMP.setModel(listmodel);
 	}
 	
+	public void inicializar() {
+		cargarLista();
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
