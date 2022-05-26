@@ -17,7 +17,7 @@ public class PersonaDaoImpl implements PersonaDao  {
 	private String delete = "DELETE FROM personas WHERE DNI = ?";
 
 	@Override
-	public boolean modificarPersona(Persona Modificar, String dni) {
+	public boolean modificarPersona(Persona Modificar) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean modificarOk = false;
@@ -25,8 +25,8 @@ public class PersonaDaoImpl implements PersonaDao  {
 			statement = conexion.prepareStatement(modifi);
 			statement.setString(1, Modificar.getNombre());
 			statement.setString(2, Modificar.getApellido());
-			statement.setString(3, dni);
-			
+			statement.setString(3, Modificar.getDni());
+		
 			if(statement.executeUpdate() > 0) {
 				conexion.commit();
 				modificarOk = true;

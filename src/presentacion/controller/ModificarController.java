@@ -70,11 +70,10 @@ public class ModificarController implements ActionListener {
 	private void ModificarPersona(ActionEvent m) {
 		if(validarTextfield()) {
 			Persona Modificar = new Persona();
-			String DNI = PanMo.getListPersonas().getSelectedValue().getDni();
 			Modificar.setNombre(PanMo.getTxfNombre().getText());
 			Modificar.setApellido(PanMo.getTxfApellido().getText());
-			Modificar.setDni(PanMo.getTxfDNI().getText());
-			if(PerNeg.modificarPersona(Modificar, DNI)){
+			Modificar.setDni(PanMo.getListPersonas().getSelectedValue().getDni());
+			if(PerNeg.modificarPersona(Modificar)){
 				JOptionPane.showMessageDialog(null, "Persona modificada");
 			}else {
 				JOptionPane.showMessageDialog(null, "No se puedo modificar persona");
@@ -130,6 +129,7 @@ public class ModificarController implements ActionListener {
 		PanMo.getTxfApellido().setText("");
 		PanMo.getTxfNombre().setText("");
 		PanMo.getTxfDNI().setText("");
+		PanMo.getTxfDNI().setEditable(false);
 		
 		cargarLista();
 	}
