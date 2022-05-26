@@ -34,7 +34,6 @@ public class AgregarController implements ActionListener {
 			@Override
 			public void keyTyped(KeyEvent e)  {soloLetras(e, panelAgregar.getTextFieldApellido().getText());}
 		});
-		
 	}
 	
 	private void agregarPersona(ActionEvent m) {
@@ -43,20 +42,19 @@ public class AgregarController implements ActionListener {
 			persona.setNombre(panelAgregar.getTextFieldNombre().getText());
 			persona.setApellido(panelAgregar.getTextFieldApellido().getText());
 			persona.setDni(panelAgregar.getTextFieldDni().getText());
-			//if (perNegocio.getPersonaPorDni(persona.getDni()) == null) {
+			if (perNegocio.getPersonaPorDni(persona.getDni()) == null) {
 				if(perNegocio.agregarPersona(persona)) {
 				JOptionPane.showMessageDialog(null, "Persona agregada correctamente");
 				limpiarTextfield();
 				}else {
 					JOptionPane.showMessageDialog(null, "ERROR - No se pudo procesar la solicitud");
 				}
-			/*}else {
+			}else {
 				JOptionPane.showMessageDialog(null, "ERROR - Persona con Dni = "+panelAgregar.getTextFieldDni().getText()+" ya existe");
 			}
-		}else {*/
+		}else {
 			JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos");
 		}
-		
 	}
 	
 	private boolean validarTextfield() {
@@ -106,9 +104,6 @@ public class AgregarController implements ActionListener {
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void actionPerformed(ActionEvent arg0) {}
+	
 }

@@ -16,7 +16,6 @@ public class ListarController  implements ActionListener{
 	public ListarController(PanelListar panel, PersonaNegocio negocio) {
 		this.PanLi = panel;
 		this.PerNeg = negocio;
-		
 	}
 
 	public void inicializar() {
@@ -25,12 +24,10 @@ public class ListarController  implements ActionListener{
 		for (int x=0; x< lista.size(); x++) {
 			this.PanLi.getModelPersonas().addRow(new Object[] {lista.get(x).getNombre(),lista.get(x).getApellido(), lista.get(x).getDni()});
 		}
+		
 	}	
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void actionPerformed(ActionEvent e) {}
 
 }

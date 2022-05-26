@@ -12,10 +12,10 @@ import entidad.Persona;
 public class PersonaDaoImpl implements PersonaDao  {
 	
 	private String add = "INSERT INTO personas (Dni, Nombre, Apellido) VALUES (?,?,?)";
-	private String modifi = "UPDATE personas SET Dni = ?, Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
+	private String modifi = "UPDATE personas SET Nombre = ?, Apellido = ? WHERE Dni LIKE ?;";
 	private String readall = "SELECT * FROM personas";
 	private String delete = "DELETE FROM personas WHERE DNI = ?";
-	//private String getPersonaPorDni = "SELECT Dni FROM personas WHERE Dni = ?";
+	private String getPersonaPorDni = "SELECT Dni FROM personas WHERE Dni = ?";
 
 	@Override
 	public boolean modificarPersona(Persona Modificar, String dni) {
@@ -24,10 +24,9 @@ public class PersonaDaoImpl implements PersonaDao  {
 		boolean modificarOk = false;
 		try {
 			statement = conexion.prepareStatement(modifi);
-			statement.setString(1, Modificar.getDni());
-			statement.setString(2, Modificar.getNombre());
-			statement.setString(3, Modificar.getApellido());
-			statement.setString(4, dni);
+			statement.setString(1, Modificar.getNombre());
+			statement.setString(2, Modificar.getApellido());
+			statement.setString(3, dni);
 			
 			if(statement.executeUpdate() > 0) {
 				conexion.commit();
@@ -63,7 +62,7 @@ public class PersonaDaoImpl implements PersonaDao  {
 			
 	}
 	
-	/*public String getPersonaPorDni(String dni) {
+	public String getPersonaPorDni(String dni) {
 		String dniExistente = null;
 		Conexion conn = Conexion.getConexion();
 		PreparedStatement st;
@@ -80,7 +79,7 @@ public class PersonaDaoImpl implements PersonaDao  {
 			e.printStackTrace();
 		}
 		return dniExistente;
-	}*/
+	}
 	
 	private Persona getPersona(ResultSet resultSet) throws SQLException
 	{

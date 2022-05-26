@@ -20,8 +20,6 @@ public class PanelEliminar extends JPanel {
 	private DefaultListModel<Persona> model;
 	private JScrollPane Scroll;
 	
-
-
 	public PanelEliminar() {
 		setLayout(null);
 		model = new DefaultListModel<Persona>();
@@ -41,46 +39,37 @@ public class PanelEliminar extends JPanel {
 
 	}
 
-
 	public JList<Persona> getListaPersonas() {
 		return listaPersonas;
 	}
-
 
 	public void setListaPersonas(JList<Persona> listaPersonas) {
 		this.listaPersonas = listaPersonas;
 	}
 
-
 	public JButton getBtnEliminar() {
 		return btnEliminar;
 	}
-
 
 	public void setBtnEliminar(JButton btnEliminar) {
 		this.btnEliminar = btnEliminar;
 	}
 
-
 	public DefaultListModel<Persona> getModel() {
 		return model;
 	}
-
 
 	public void setModel(DefaultListModel<Persona> model) {
 		this.model = model;
 		this.listaPersonas.setModel(this.model);
 	}
 
-
 	public JScrollPane getScroll() {
 		return Scroll;
 	}
 
-
 	public void setScroll(JScrollPane scroll) {
 		Scroll = scroll;
 	}
-	
-	
+		
 }

@@ -2,8 +2,6 @@ package presentacion.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -21,9 +19,7 @@ public class EliminarController implements ActionListener {
 	public EliminarController(PanelEliminar pEliminar, PersonaNegocio negocio) {
 		this.pEliminarTMP = pEliminar;
 		this.negocioTMP = negocio;
-	
 		this.pEliminarTMP.getBtnEliminar().addActionListener(e->eliminarPersona(e));
-		
 	}
 	
 	private void eliminarPersona(ActionEvent e) {
@@ -59,7 +55,4 @@ public class EliminarController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
-	
-	
-
 }

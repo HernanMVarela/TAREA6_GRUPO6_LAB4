@@ -11,6 +11,8 @@ import java.awt.Font;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class PanelModificar extends JPanel {
 
@@ -22,6 +24,7 @@ public class PanelModificar extends JPanel {
 	private DefaultListModel<Persona> model;
 	private JScrollPane Scroll;
 	private JButton btnModificar;
+	private JLabel lblSeleccioneLaPersona;
 
 	public PanelModificar() {
 		setLayout(null);
@@ -31,7 +34,7 @@ public class PanelModificar extends JPanel {
 		listPersonas.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		Scroll = new JScrollPane();
-		Scroll.setBounds(25, 25, 450, 180);
+		Scroll.setBounds(25, 33, 450, 172);
 		Scroll.setViewportView(listPersonas);
 	    listPersonas.setLayoutOrientation(JList.VERTICAL);
 	    add(Scroll);
@@ -42,6 +45,8 @@ public class PanelModificar extends JPanel {
 		txfNombre.setColumns(10);
 		
 		txfDNI = new JTextField();
+		txfDNI.setBackground(Color.WHITE);
+		txfDNI.setEditable(false);
 		txfDNI.setBounds(350, 216, 125, 20);
 		add(txfDNI);
 		txfDNI.setColumns(10);
@@ -54,6 +59,11 @@ public class PanelModificar extends JPanel {
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(189, 253, 125, 23);
 		add(btnModificar);
+		
+		lblSeleccioneLaPersona = new JLabel("Seleccione la persona que desea modificar");
+		lblSeleccioneLaPersona.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSeleccioneLaPersona.setBounds(25, 11, 344, 20);
+		add(lblSeleccioneLaPersona);
 
 	}
 	
@@ -113,5 +123,4 @@ public class PanelModificar extends JPanel {
 	public void setBtnModificar(JButton btnModificar) {
 		this.btnModificar = btnModificar;
 	}
-
 }

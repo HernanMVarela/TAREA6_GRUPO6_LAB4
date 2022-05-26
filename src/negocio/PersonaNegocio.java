@@ -9,6 +9,6 @@ public interface PersonaNegocio {
 	public List<Persona> readAll();
 	public boolean eliminarPersona(Persona Eliminar);
 	public boolean agregarPersona (Persona Agregar);
-	//public String getPersonaPorDni(String dni);
+	public String getPersonaPorDni(String dni);
 	
 }

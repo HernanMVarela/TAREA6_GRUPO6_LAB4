@@ -13,13 +13,11 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 		PersonaDao modificar = new PersonaDaoImpl();
 		return modificar.modificarPersona(Modificar, dni);
 	}
-	
 
 	@Override
 	public List<Persona> readAll() {
 		PersonaDao perdao = new PersonaDaoImpl();
 		return perdao.readAll();
-		
 	}
 
 	@Override
@@ -31,17 +29,15 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 		{ return false; }
 	}
 
-
 	@Override
 	public boolean agregarPersona(Persona Agregar) {
 		PersonaDao agregar = new PersonaDaoImpl();
 		return agregar.agregarPersona(Agregar);
 	}
 
-
-	/*@Override
+	@Override
 	public String getPersonaPorDni(String dni) {
 		String dniExistente = new PersonaDaoImpl().getPersonaPorDni(dni);
 		return dniExistente;
-	}*/
+	}
 }
