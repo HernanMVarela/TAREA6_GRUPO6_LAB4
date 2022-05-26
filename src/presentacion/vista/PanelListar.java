@@ -21,7 +21,13 @@ public class PanelListar extends JPanel {
 		setLayout(null);
 
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
-		tablaPersona = new JTable(modelPersonas);
+		tablaPersona = new JTable(modelPersonas){
+			private static final long serialVersionUID = 1L;
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       return false;
+		    }
+		};
 		
 		tablaPersona.getColumnModel().getColumn(0).setPreferredWidth(100);
 		tablaPersona.getColumnModel().getColumn(0).setResizable(false);
@@ -48,7 +54,6 @@ public class PanelListar extends JPanel {
 				Object[] fila = {nombre, apellido, dni};
 				this.getModelPersonas().addRow(fila);
 			}
-
 		}
 
 	public DefaultTableModel getModelPersonas() {

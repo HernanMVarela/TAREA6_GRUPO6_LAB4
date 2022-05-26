@@ -1,6 +1,8 @@
 package negocioImpl;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 import dao.PersonaDao;
 import daoImpl.PersonaDaoImpl;
@@ -31,13 +33,34 @@ public class PersonaNegocioImpl implements PersonaNegocio {
 
 	@Override
 	public boolean agregarPersona(Persona Agregar) {
-		PersonaDao agregar = new PersonaDaoImpl();
+		PersonaDao agregar = new PersonaDaoImpl();	
 		return agregar.agregarPersona(Agregar);
 	}
 
 	@Override
-	public String getPersonaPorDni(String dni) {
-		String dniExistente = new PersonaDaoImpl().getPersonaPorDni(dni);
-		return dniExistente;
+	public boolean getPersonaPorDni(Persona persona) {
+		PersonaDao dao = new PersonaDaoImpl();
+		if(dao.readAll().contains(persona)) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	@Override
+	public List<Persona> ordenarLista(List<Persona> list) {
+		TreeSet<Persona> lista = new TreeSet<Persona>();
+		if (list.isEmpty()) return list;
+		try {
+			for (int x=0; x<list.size(); x++)
+				lista.add(list.get(x));
+			Iterator<Persona> ite = lista.iterator();
+			list.clear();
+			while (ite.hasNext())
+				list.add(ite.next());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

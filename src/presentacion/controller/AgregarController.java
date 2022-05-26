@@ -42,15 +42,19 @@ public class AgregarController implements ActionListener {
 			persona.setNombre(panelAgregar.getTextFieldNombre().getText());
 			persona.setApellido(panelAgregar.getTextFieldApellido().getText());
 			persona.setDni(panelAgregar.getTextFieldDni().getText());
-			if (perNegocio.getPersonaPorDni(persona.getDni()) == null) {
-				if(perNegocio.agregarPersona(persona)) {
-				JOptionPane.showMessageDialog(null, "Persona agregada correctamente");
-				limpiarTextfield();
-				}else {
-					JOptionPane.showMessageDialog(null, "ERROR - No se pudo procesar la solicitud");
-				}
-			}else {
+			if (panelAgregar.getTextFieldDni().getText().length() < 7) {
+				JOptionPane.showMessageDialog(null, "DNI Inválido - debe tener al menos 7 caracteres.");
+				return;
+			}
+			if (perNegocio.getPersonaPorDni(persona)) {
 				JOptionPane.showMessageDialog(null, "ERROR - Persona con Dni = "+panelAgregar.getTextFieldDni().getText()+" ya existe");
+				return;
+			}
+			if(perNegocio.agregarPersona(persona)) {
+				JOptionPane.showMessageDialog(null, "Persona agregada correctamente");
+				inicializar();
+			}else {
+				JOptionPane.showMessageDialog(null, "ERROR - No se pudo procesar la solicitud");
 			}
 		}else {
 			JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos");
@@ -96,7 +100,7 @@ public class AgregarController implements ActionListener {
 		}
 	}
 	
-	private void limpiarTextfield() {
+	public void inicializar() {
 		panelAgregar.getTextFieldApellido().setText("");
 		panelAgregar.getTextFieldNombre().setText("");
 		panelAgregar.getTextFieldDni().setText("");

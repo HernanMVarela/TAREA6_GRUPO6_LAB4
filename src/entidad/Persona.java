@@ -70,7 +70,7 @@ public class Persona implements Comparable<Persona>{
 
 	@Override
 	public int compareTo(Persona o) {
-		return this.getNombre().compareTo(o.getNombre());
+		return this.toString().compareToIgnoreCase(o.toString());
 	}
 	
 }

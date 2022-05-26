@@ -2,6 +2,8 @@ package presentacion.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -43,8 +45,10 @@ public class EliminarController implements ActionListener {
 	private void cargarLista() {
 		listmodel = pEliminarTMP.getModel();
 		pEliminarTMP.getModel().clear();
-		for (int x=0; x< negocioTMP.readAll().size(); x++) {
-			listmodel.addElement(negocioTMP.readAll().get(x));
+		List<Persona> list = negocioTMP.ordenarLista(negocioTMP.readAll());
+		
+		for (int x=0; x< list.size(); x++) {
+			listmodel.addElement(list.get(x));
 		}
 		pEliminarTMP.setModel(listmodel);
 	}

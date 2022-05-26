@@ -19,7 +19,7 @@ public class ListarController  implements ActionListener{
 	}
 
 	public void inicializar() {
-		List<Persona> lista = PerNeg.readAll();
+		List<Persona> lista = PerNeg.ordenarLista(PerNeg.readAll());
 		
 		for (int x=0; x< lista.size(); x++) {
 			this.PanLi.getModelPersonas().addRow(new Object[] {lista.get(x).getNombre(),lista.get(x).getApellido(), lista.get(x).getDni()});
